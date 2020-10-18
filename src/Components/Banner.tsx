@@ -35,10 +35,13 @@ export default function Banner() {
 
             </div>
             <Pane flex={1} alignItems="center" display="flex" justifyContent="center" marginTop={96}>
-                <Image src={banner} style={{ width: '20%', marginRight: '30px' }} />
+                <a href="https://www.betterbe.com/">
+                    <Image src={banner} style={{ width: '20%', marginRight: '30px' }} />
+                </a>           
                 {/* <Image src={(setColors.navBarBackground === colors.blue) ? iawhite : ia} style={{ width: '20%', marginLeft: '30px' }} /> */}
-                <Image src={ia} style={{ width: '20%', marginLeft: '30px' }} />
-
+                <a href="https://www.inter-actief.utwente.nl/">
+                    <Image src={ia} style={{ width: '20%', marginLeft: '30px' }} />
+                </a>
             </Pane >
         </>
     );
