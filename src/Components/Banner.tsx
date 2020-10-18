@@ -2,7 +2,8 @@ import React from 'react';
 import { Pane, Tab, TabNavigation, majorScale, Heading, Image } from 'evergreen-ui'
 import banner from '../resources/banner.png';
 import ia from '../resources/ia.png';
-import { setColors } from '../Constants';
+import iawhite from '../resources/iawhite.png';
+import { colors, setColors } from '../Constants';
 
 
 
