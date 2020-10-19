@@ -18,7 +18,7 @@ export default function Participate() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            team: `${team[0]}`, official: team[1],
+            team: `${team[0]}`, official: check,
             name1: `${person1[0]}`, email1: `${person1[2]}`, number1: `${person1[1]}`,
             name2: `${person2[0]}`, email2: `${person2[2]}`, number2: `${person2[1]}`,
             name3: `${person3[0]}`, email3: `${person3[2]}`, number3: `${person3[1]}`,
@@ -27,7 +27,8 @@ export default function Participate() {
     };
 
     function callApi() {
-        fetch("http://localhost:5000/register", requestOptions)
+        const config = require('../config');
+        fetch(`${config.api}/register`, requestOptions)
             .then(res => res.text())
             .then(res => { console.log(res); setResponse(res); })
             .catch(() => setBackendError(true))
