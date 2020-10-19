@@ -6,6 +6,11 @@ import Page from '../Components/Page';
 export default function MainPage() {
     return (
         <Page>
+            <InfoCard title="Date">
+                <CardText>
+                    The new date of TAPC 2020 is set to be 14th of Novermber 2020!
+                </CardText>
+            </InfoCard>
             <InfoCard title="Participation">
                 <CardText>
                     In order to participate in the Twents Algorithm Programming Contest (TAPC),
@@ -16,11 +21,10 @@ export default function MainPage() {
                     is to solve them as quickly and efficiently as possible.
                 </CardText>
                 <CardText>
-                    During the match lunch will be arranged, and after the match there will be a drink. The winner will be announced at the drink.
+                    The winner will be announced after the competition is over.
                 The winning official team (and sometimes more teams) can join the <a rel="noopener noreferrer" target="_blank" href="http://bapc.eu">Benelux Algorithm Programming Contest</a>,
                 representing Twente.
-                Participation in the TAPC is a hundred percent free (free as in free beer). Every year both the competition and the drink are very
-                'gezellig' (which is an untranslatable Dutch word).
+                Participation in the TAPC is a hundred percent free.
                 </CardText>
             </InfoCard>
 
