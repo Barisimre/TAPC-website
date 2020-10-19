@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Dialog, Heading, TextInput } from 'evergreen-ui'
+import { Button, Checkbox, Dialog, Heading, TextInput } from 'evergreen-ui'
 import Page from '../Components/Page';
 import InfoCard, { CardText } from '../Components/InfoCard';
 
@@ -7,6 +7,7 @@ export default function Participate() {
 
     const [response, setResponse] = React.useState('')
     const [team, setTeam] = React.useState(["", false]);
+    const [check, setCheck] = React.useState(false);
     const [person1, setPerson1] = React.useState(["", "", ""])
     const [person2, setPerson2] = React.useState(["", "", ""])
     const [person3, setPerson3] = React.useState(["", "", ""])
@@ -35,68 +36,107 @@ export default function Participate() {
 
     return (
         <Page>
-            <InfoCard title="Participant 1">
-                <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
-                    <Heading marginRight={40}>Name: </Heading>
-                    <TextInput marginLeft={170}
-                        onChange={(e: any) => setPerson1([e.target.value, person1[1]])}
-                    />
+            {response === "" && <div>
+                <InfoCard title="Team">
+                    <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
+                        <Heading marginRight={40}>Team Name*: </Heading>
+                        <TextInput marginLeft={170}
+                            onChange={(e: any) => setTeam([e.target.value, team[1]])}
+                        />
+                    </div>
+                    <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
+                        <Heading marginRight={40}>Official: </Heading>
+                        <Checkbox marginLeft={205}
+                            checked={check}
+                            onChange={(e: any) => {
+                                setTeam([team[0], !team[1]])
+                                setCheck(!check)
+                            }}
+                        />
+                    </div>
+                </InfoCard>
+                <InfoCard title="Participant 1">
+                    <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
+                        <Heading marginRight={40}>Name*: </Heading>
+                        <TextInput marginLeft={170}
+                            onChange={(e: any) => setPerson1([e.target.value, person1[1]])}
+                        />
+                    </div>
+                    <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
+                        <Heading marginRight={40}>Student number*: </Heading>
+                        <TextInput marginLeft={100}
+                            onChange={(e: any) => setPerson1([person1[0], e.target.value])}
+                        />
+                    </div>
+                    <div style={{ display: 'flex', alignItems: "center" }}>
+                        <Heading marginRight={40}>Email*: </Heading>
+                        <TextInput marginLeft={172}
+                            onChange={(e: any) => setPerson1([person1[0], person1[1], e.target.value])}
+                        />
+                    </div>
+                </InfoCard>
+                <InfoCard title="Participant 2">
+                    <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
+                        <Heading marginRight={40}>Name: </Heading>
+                        <TextInput marginLeft={170}
+                            onChange={(e: any) => setPerson2([e.target.value, person2[1]])}
+                        />
+                    </div>
+                    <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
+                        <Heading marginRight={40}>Student number: </Heading>
+                        <TextInput marginLeft={100}
+                            onChange={(e: any) => setPerson2([person2[0], e.target.value])}
+                        />
+                    </div>
+                    <div style={{ display: 'flex', alignItems: "center" }}>
+                        <Heading marginRight={40}>Email: </Heading>
+                        <TextInput marginLeft={172}
+                            onChange={(e: any) => setPerson2([person2[0], person2[1], e.target.value])}
+                        />
+                    </div>
+                </InfoCard>
+                <InfoCard title="Participant 3">
+                    <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
+                        <Heading marginRight={40}>Name: </Heading>
+                        <TextInput marginLeft={170}
+                            onChange={(e: any) => setPerson3([e.target.value, person3[1]])}
+                        />
+                    </div>
+                    <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
+                        <Heading marginRight={40}>Student number: </Heading>
+                        <TextInput marginLeft={100}
+                            onChange={(e: any) => setPerson3([person3[0], e.target.value])}
+                        />
+                    </div>
+                    <div style={{ display: 'flex', alignItems: "center" }}>
+                        <Heading marginRight={40}>Email: </Heading>
+                        <TextInput marginLeft={172}
+                            onChange={(e: any) => setPerson3([person3[0], person3[1], e.target.value])}
+                        />
+                    </div>
+                </InfoCard>
+                <Button margin={8} style={{ width: 140 }} onClick={() => callApi()}>Submit Registration</Button>
+            </div>}
+            {response === 'good' &&
+                <div>
+                    <InfoCard title="Success">
+                        <CardText>
+                            Your request was successfully registered.
+                            You should get an email about the registration.
+                        </CardText>
+                    </InfoCard>
                 </div>
-                <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
-                    <Heading marginRight={40}>Student number: </Heading>
-                    <TextInput marginLeft={100}
-                        onChange={(e: any) => setPerson1([person1[0], e.target.value])}
-                    />
+            }
+            {response === 'Not valid' &&
+                <div>
+                    <InfoCard title="Error">
+                        <CardText>
+                            An error occurred. You probably filled a field wrong. Please make sure all the fields
+                             are filled per joining participant. And don't forget the team name
+                        </CardText>
+                    </InfoCard>
                 </div>
-                <div style={{ display: 'flex', alignItems: "center" }}>
-                    <Heading marginRight={40}>Email: </Heading>
-                    <TextInput marginLeft={172}
-                        onChange={(e: any) => setPerson1([person1[0], person1[1], e.target.value])}
-                    />
-                </div>
-            </InfoCard>
-            <InfoCard title="Participant 2">
-                <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
-                    <Heading marginRight={40}>Name: </Heading>
-                    <TextInput marginLeft={170}
-                        onChange={(e: any) => setPerson2([e.target.value, person2[1]])}
-                    />
-                </div>
-                <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
-                    <Heading marginRight={40}>Student number: </Heading>
-                    <TextInput marginLeft={100}
-                        onChange={(e: any) => setPerson2([person2[0], e.target.value])}
-                    />
-                </div>
-                <div style={{ display: 'flex', alignItems: "center" }}>
-                    <Heading marginRight={40}>Email: </Heading>
-                    <TextInput marginLeft={172}
-                        onChange={(e: any) => setPerson2([person2[0], person2[1], e.target.value])}
-                    />
-                </div>
-            </InfoCard>
-            <InfoCard title="Participant 3">
-                <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
-                    <Heading marginRight={40}>Name: </Heading>
-                    <TextInput marginLeft={170}
-                        onChange={(e: any) => setPerson3([e.target.value, person3[1]])}
-                    />
-                </div>
-                <div style={{ display: 'flex', alignItems: "center", marginBottom: "20px" }}>
-                    <Heading marginRight={40}>Student number: </Heading>
-                    <TextInput marginLeft={100}
-                        onChange={(e: any) => setPerson3([person3[0], e.target.value])}
-                    />
-                </div>
-                <div style={{ display: 'flex', alignItems: "center" }}>
-                    <Heading marginRight={40}>Email: </Heading>
-                    <TextInput marginLeft={172}
-                        onChange={(e: any) => setPerson3([person3[0], person3[1], e.target.value])}
-                    />
-                </div>
-            </InfoCard>
-            <Button margin={8} style={{width: 140}} onClick={() => callApi()}>Submit Registration</Button>
-
+            }
             <Dialog
                 isShown={backendError}
                 onCloseComplete={() => setBackendError(false)}
@@ -106,12 +146,12 @@ export default function Participate() {
                 <InfoCard title="Backend Error">
                     <CardText>
                         The committee seems to have failed you and let the backend not work right now.
-                        Please email tkp@inter-actief.net to let this know and register your team.
+                        Please email tapc2020@inter-actief.net to let this know and register your team.
                         We are so sorry for this
                     </CardText>
 
                 </InfoCard>
-                </Dialog>
+            </Dialog>
         </Page>
     );
 }
